@@ -24,7 +24,7 @@ void setup(){
 }
 
 void loop(){
-  Serial.println("Going into loop");
+  //Serial.println("Going into loop");
   //Serial.flush();
   read();
   delay(1000);
@@ -33,15 +33,42 @@ void loop(){
 void read(){
   int j = 0 ;
   int buffer[128];
-  Serial.println("Starting the Read loop");
+  //Serial.println("Starting the Read loop");
   for(j=0 ; j < 128; j++){
     buffer[j] = (analogRead(0));
     delayMicroseconds(100000);
   }
   
-  Serial.println("Printing out buffer: ");
+  //Serial.println("Printing out buffer: ");
   for(j=0 ; j<128; j++){
-   Serial.println(buffer[j]);
+   int temp = buffer[j];
+   char upper = (((temp >> 5) & 0x00FF));
+   char lower = (buffer[j] & 0x001F);
+   
+   upper >> 3;
+   lower >> 3;
+   
+   
+   if(j == 0){
+     
+     upper |= 0x0060;
+     lower |= 0x0040;
+   }
+   else{
+     upper |= 0x20;
+     lower |= 0x00;
+   }
+
+   //Serial.print("upper: ");
+   //if(j==0)
+     //Serial.print();
+   Serial.print(upper);
+   //Serial.print(" lower: "); 
+   Serial.print(lower);
+   //Serial.println();
+   //}
+   //Stuct.unpack 
+   //struct.pack
   }
  
  //Serial.flush();
