@@ -16,7 +16,7 @@ connected = False
 
 ## establish connection to the serial port that your arduino 
 ## is connected to.
-locations=['/dev/tty.usbmodem1411']
+locations=['/dev/tty.usbmodem1411','COM4']
 
 for device in locations:
     try:
@@ -44,7 +44,7 @@ test_list =  []
 ## read serial data from arduino and 
 ## write it to the text file 'test_output.txt'
 count = 0
-while count < 10:
+while count < 1028:
     if ser.inWaiting():
         x=ser.read()
         print x
@@ -67,6 +67,6 @@ print 'Packed Value   :', binascii.hexlify(packed_data)
 #print 'Unpacked Values:', unpacked_data
 
 ## close the serial connection and text file
-text_file.write("\n*******End of new Test*********")
+text_file.write("\n*******End of new Test*********\n")
 text_file.close()
 ser.close()
