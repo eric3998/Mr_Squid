@@ -2,6 +2,7 @@
 import serial
 import array
 import struct 
+import binascii
 
 ## Boolean variable that will represent 
 ## whether or not the arduino is connected
@@ -29,22 +30,30 @@ while not connected:
 ##gps co-ordinates received from the rover    
 text_file = open("position4.txt", 'a')
 
-test_array = array('c')
+test_list =  []
 ## read serial data from arduino and 
 ## write it to the text file 'position.txt'
 count = 0
-while count < 1028:
+while count < 10:
     if ser.inWaiting():
         x=ser.read()
-        #print x
-        struct.pack(x)
+        print x
+        test_list.append(x)
         text_file.write(x)
         #if x=="\n":
          #    text_file.seek(0)
          # text_file.truncate()
         count = count + 1
 
+#s = struct
+packed_data = struct.pack('%sc' % len(test_list), *test_list)
 
+print 'Original values:', test_list
+#print 'Format string  :', s.format
+#print 'Uses           :', s.size, 'bytes'
+print 'Packed Value   :', binascii.hexlify(packed_data)
+#unpacked_data = struct.unpack('%sc' % len(test_list), packed_data)
+#print 'Unpacked Values:', unpacked_data
 
 ## close the serial connection and text file
 text_file.close()
