@@ -67,8 +67,6 @@ void read(){
    Serial.print(lower);
    //Serial.println();
    //}
-   //Stuct.unpack 
-   //struct.pack
   }
  
  //Serial.flush();
