@@ -27,7 +27,7 @@ void loop(){
   //Serial.println("Going into loop");
   //Serial.flush();
   read();
-  delay(1000);
+  delay(1);
 }
 
 void read(){
@@ -50,6 +50,7 @@ void read(){
    
    
    if(j == 0){
+     Serial.print('a');
      
      upper |= 0x0060;
      lower |= 0x0040;
@@ -62,9 +63,18 @@ void read(){
    //Serial.print("upper: ");
    //if(j==0)
      //Serial.print();
-   Serial.print(upper);
+   //Serial.print(upper);
    //Serial.print(" lower: "); 
-   Serial.print(lower);
+   //Serial.print(lower);
+   //Serial.print("This is a test");
+   //Serial.write(upper);
+   //Serial.write(lower);
+   //Serial.print(temp,HEX);
+   Serial.print(upper,HEX);
+   
+   //Serial.print(" lower: ");
+   Serial.print(lower,HEX);
+   
    //Serial.println();
    //}
   }
