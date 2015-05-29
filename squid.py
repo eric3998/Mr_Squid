@@ -68,7 +68,7 @@ def readFirst(ser):
     print ret_y
     ret = np.bitwise_or(ret_x,ret_y)
     print "ret: ",ret
-    ret
+    return ret
 
 def read(ser, x):
     #x=ser.read(2)
@@ -88,7 +88,10 @@ def read(ser, x):
     print ret_y
     ret = np.bitwise_or(ret_x,ret_y)
     print "ret: ",ret
-    ret
+    return ret
+
+
+
 
 
 count = 0
@@ -97,14 +100,21 @@ while count < 1028:
         temp = ser.read()
         if temp == 'a':
             test_list.append(readFirst(ser))
-            while count < 1027:
+            count = 1
+            while count < 1028:
                 nxt = ser.read()
                 if nxt == 'a':
+                    start = time.time()
                     test_list.append(readFirst(ser))
+                    end = time.time()
                 else:
                     test_list.append(read(ser,nxt))
                 count = count + 1
         count = count + 1
+
+
+
+print "one operation", end - start
 
 
 ##
@@ -114,8 +124,8 @@ while count < 1028:
 #for x in range(0, len(test_list)-1):
     #o_list.append(x)
 
-plt.plot(test_list)
-plt.axis([0, 400, 0, 400])
+plt.plot(test_list, 'o')
+plt.axis([0, 1028, 0, 600])
 plt.show()
 
 #Packing the data recieved 
