@@ -97,10 +97,13 @@ while count < 1028:
         temp = ser.read()
         if temp == 'a':
             test_list.append(readFirst(ser))
-        else:
-            test_list.append(read(ser,temp))
-
-
+            while count < 1027:
+                nxt = ser.read()
+                if nxt == 'a':
+                    test_list.append(readFirst(ser))
+                else:
+                    test_list.append(read(ser,nxt))
+                count = count + 1
         count = count + 1
 
 
@@ -108,10 +111,10 @@ while count < 1028:
 #  This is where I am trying to figure out how to use 
 #  matplotlib      
 
-for x in range(0, len(test_list)-1):
-    o_list.append(x)
+#for x in range(0, len(test_list)-1):
+    #o_list.append(x)
 
-plt.plot(test_list, o_list)
+plt.plot(test_list)
 plt.axis([0, 400, 0, 400])
 plt.show()
 
